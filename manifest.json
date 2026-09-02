@@ -1,0 +1,20 @@
+{
+  "name": "Lume — Guided Massage",
+  "short_name": "Lume",
+  "description": "Animated massage paths and how-tos. Give a session they won't want to stop.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b0c10",
+  "theme_color": "#0b0c10",
+  "id": "lume-massage-guide",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
