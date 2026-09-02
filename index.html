@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0c10" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="description" content="Animated massage stroke paths and how-tos. Give a session they won't want to stop." />
+  <title>Lume — Guided Massage</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="apple-touch-icon" href="icon.svg" />
+  <link rel="icon" href="icon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="top">
+      <div class="brand">
+        <div class="brand-mark"></div>
+        <span>Lume</span>
+      </div>
+      <button class="icon-btn" id="installBtn" title="Install" hidden>↓</button>
+    </header>
+
+    <section class="view active" id="view-home">
+      <div class="hero">
+        <div class="chip">Partner · Recovery · Practice</div>
+        <h1>Give a massage<br>they <span class="gold">won’t want to stop</span>.</h1>
+        <p>Animated stroke paths on the body, timed sessions, and the how-to so your hands know where to go.</p>
+      </div>
+      <div class="cta-row">
+        <button class="btn btn-gold" data-go="guide">Open back map</button>
+        <button class="btn btn-ghost" data-go="session">Start 8-min flow</button>
+      </div>
+      <div class="grid">
+        <article class="card part-card" data-go="guide">
+          <div class="thumb">↑</div>
+          <div>
+            <h3>Back — the viral map</h3>
+            <p>Long glides beside the spine, fan-outs across the ribs, thumb work on the traps. The pattern from those glowing-arrow videos.</p>
+          </div>
+        </article>
+        <article class="card part-card" data-go="howto">
+          <div class="thumb">✦</div>
+          <div>
+            <h3>Fundamentals first</h3>
+            <p>Oil, pressure, consent, body mechanics. The 90 seconds that make the rest feel expensive.</p>
+          </div>
+        </article>
+        <article class="card part-card" data-go="tech">
+          <div class="thumb">◎</div>
+          <div>
+            <h3>Stroke library</h3>
+            <p>Effleurage, petrissage, friction, finishing strokes — what each one is actually for.</p>
+          </div>
+        </article>
+      </div>
+      <p class="install" id="installHint">On your phone: Safari/Chrome → Share or menu → <strong>Add to Home Screen</strong> to use Lume like an app.</p>
+    </section>
+
+    <section class="view" id="view-guide">
+      <div class="chip">Interactive map</div>
+      <h2 style="font-family:Fraunces,serif;font-weight:500;font-size:26px;margin:4px 0 8px;">The back paths</h2>
+      <p class="hint">Tap a stroke to highlight it. Gold dashed lines are the live path — follow them with warm, oiled hands.</p>
+      <div class="map-wrap">
+        <svg id="back-svg" viewBox="0 0 320 480" xmlns="http://www.w3.org/2000/svg" aria-label="Back massage map">
+          <defs>
+            <filter id="glow" x="-40%" y="-40%" width="180%" height="180%">
+              <feGaussianBlur stdDeviation="3.2" result="b"/>
+              <feMerge>
+                <feMergeNode in="b"/>
+                <feMergeNode in="SourceGraphic"/>
+              </feMerge>
+            </filter>
+          </defs>
+          <path class="body-fill" d="M160 42 C178 42 192 56 196 78 C214 86 232 108 238 142 C246 188 244 250 236 310 C230 352 222 392 208 424 C196 444 176 456 160 456 C144 456 124 444 112 424 C98 392 90 352 84 310 C76 250 74 188 82 142 C88 108 106 86 124 78 C128 56 142 42 160 42 Z"/>
+          <path class="body-outline" d="M160 42 C178 42 192 56 196 78 C214 86 232 108 238 142 C246 188 244 250 236 310 C230 352 222 392 208 424 C196 444 176 456 160 456 C144 456 124 444 112 424 C98 392 90 352 84 310 C76 250 74 188 82 142 C88 108 106 86 124 78 C128 56 142 42 160 42 Z"/>
+          <path d="M160 86 L160 430" fill="none" stroke="rgba(232,195,106,.12)" stroke-width="2" stroke-dasharray="2 6"/>
+          <path id="base-paraL" class="path-base" d="M148 400 C146 340 144 260 146 190 C148 140 150 110 152 96"/>
+          <path id="glow-paraL" class="path-glow" d="M148 400 C146 340 144 260 146 190 C148 140 150 110 152 96"/>
+          <path id="base-paraR" class="path-base" d="M172 400 C174 340 176 260 174 190 C172 140 170 110 168 96"/>
+          <path id="glow-paraR" class="path-glow" d="M172 400 C174 340 176 260 174 190 C172 140 170 110 168 96"/>
+          <path id="base-fanL" class="path-base" d="M146 250 C120 248 96 230 86 200"/>
+          <path id="glow-fanL" class="path-glow" d="M146 250 C120 248 96 230 86 200"/>
+          <path id="base-fanR" class="path-base" d="M174 250 C200 248 224 230 234 200"/>
+          <path id="glow-fanR" class="path-glow" d="M174 250 C200 248 224 230 234 200"/>
+          <path id="base-trapL" class="path-base" d="M128 120 C110 128 96 148 92 170"/>
+          <path id="glow-trapL" class="path-glow" d="M128 120 C110 128 96 148 92 170"/>
+          <path id="base-trapR" class="path-base" d="M192 120 C210 128 224 148 228 170"/>
+          <path id="glow-trapR" class="path-glow" d="M192 120 C210 128 224 148 228 170"/>
+          <path id="base-lowL" class="path-base" d="M150 390 C130 388 108 372 98 350"/>
+          <path id="glow-lowL" class="path-glow" d="M150 390 C130 388 108 372 98 350"/>
+          <path id="base-lowR" class="path-base" d="M170 390 C190 388 212 372 222 350"/>
+          <path id="glow-lowR" class="path-glow" d="M170 390 C190 388 212 372 222 350"/>
+          <path id="base-across" class="path-base" d="M100 210 C140 198 180 198 220 210"/>
+          <path id="glow-across" class="path-glow" d="M100 210 C140 198 180 198 220 210"/>
+          <circle id="handL" class="hand" r="7" cx="148" cy="400"/>
+          <circle id="handR" class="hand" r="7" cx="172" cy="400"/>
+        </svg>
+      </div>
+      <div class="legend"><span><i></i>Follow the gold</span><span>Stay off the bony spine</span></div>
+      <div class="grid" id="stroke-list"></div>
+    </section>
+
+    <section class="view" id="view-session">
+      <div class="chip">Guided flow · 8 minutes</div>
+      <h2 style="font-family:Fraunces,serif;font-weight:500;font-size:26px;margin:4px 0 6px;">Hands-on session</h2>
+      <p class="step-meta" id="sessLabel">Warm oil · light contact first</p>
+      <div class="progress"><span id="sessBar"></span></div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;">
+        <strong id="sessTitle">Get ready</strong>
+        <span class="timer" id="sessTime">0:00</span>
+      </div>
+      <p id="sessBody" style="color:var(--muted);font-size:14.5px;min-height:4.5em;">Warm the oil in your palms. Ask what pressure they like. Start at the low back.</p>
+      <div class="map-wrap" style="margin-top:12px;">
+        <p class="hint" style="padding:8px 12px 0;">Watch the map — only the current stroke glows.</p>
+        <p style="text-align:center;padding:20px;color:var(--gold);font-size:13px;" id="sessHint">Open the Back map tab anytime.</p>
+      </div>
+      <div class="controls">
+        <button class="btn btn-ghost" id="sessPrev">Prev</button>
+        <button class="btn btn-gold" id="sessToggle">Start</button>
+        <button class="btn btn-ghost" id="sessNext">Next</button>
+      </div>
+    </section>
+
+    <section class="view" id="view-howto">
+      <div class="chip">How-to</div>
+      <h2 style="font-family:Fraunces,serif;font-weight:500;font-size:26px;margin:4px 0 12px;">Make it feel expensive</h2>
+      <ol class="steps">
+        <li><div class="num">1</div><div><h3>Consent & check-ins</h3><p>Ask before you start, and again after a minute: “more pressure, less, or stay?” Talking is part of the technique.</p></div></li>
+        <li><div class="num">2</div><div><h3>Setup</h3><p>Warm room, towel under them, another towel to cover when you finish. Phone on silent. Oil or unscented lotion in a dish — not poured cold onto skin.</p></div></li>
+        <li><div class="num">3</div><div><h3>Warm your hands</h3><p>Rub oil between palms until they’re warm. Cold hands kill the mood instantly.</p></div></li>
+        <li><div class="num">4</div><div><h3>Direction</h3><p>Long strokes on the back generally travel <em>up toward the heart</em> (low back → shoulders). Work the muscle beside the spine, never grind on the vertebrae.</p></div></li>
+        <li><div class="num">5</div><div><h3>Use your body, not just arms</h3><p>Lean from the hips. Soft elbows. If your forearms burn after two minutes, you’re muscling it — slow down and use weight.</p></div></li>
+        <li><div class="num">6</div><div><h3>Don’t break contact</h3><p>When you switch sides or strokes, keep one hand on them. The nervous system reads “still safe.”</p></div></li>
+        <li><div class="num">7</div><div><h3>Finish like a pro</h3><p>Last 60 seconds go lighter and slower. Cover with a towel. Give them 30 seconds before they have to sit up.</p></div></li>
+      </ol>
+      <div class="card" style="margin-top:18px;">
+        <h3>Skip these</h3>
+        <p>Fresh injury, unexplained pain, fever, blood clots, pregnancy (unless you know prenatal work), directly on the spine or kidneys. When in doubt, stay light and stay off.</p>
+      </div>
+    </section>
+
+    <section class="view" id="view-tech">
+      <div class="chip">Library</div>
+      <h2 style="font-family:Fraunces,serif;font-weight:500;font-size:26px;margin:4px 0 12px;">The strokes</h2>
+      <div class="grid">
+        <article class="card"><h3>Effleurage — long glides</h3><p>Open palms, whole hand. Spreads oil, warms tissue, maps the back. This is most of the “arrow video.” Slow. Repeat 4–6 times each path.</p></article>
+        <article class="card"><h3>Paravertebral — beside the spine</h3><p>Thumbs or palms either side of the bony ridge, traveling up. The money line for “don’t stop.” Keep 1–2 cm off the vertebrae.</p></article>
+        <article class="card"><h3>Fan-out — ribs & lats</h3><p>From the mid-back, glide out toward the sides following the rib angle. Opens the breath. Lighter over the floating ribs.</p></article>
+        <article class="card"><h3>Traps & shoulders</h3><p>Knead the upper traps (the coat-hanger muscles). Thumb circles on the meat of the shoulder, not the pointy acromion.</p></article>
+        <article class="card"><h3>Petrissage — knead</h3><p>Pick up and roll muscle like bread dough. Best on traps and outer back, not on thin tissue over bone.</p></article>
+        <article class="card"><h3>Friction — small circles</h3><p>Thumb or two fingers, tiny circles on a tight spot. 20–30 seconds, then glide away. Ask if the “hurt-so-good” is still good.</p></article>
+      </div>
+    </section>
+
+    <nav class="nav">
+      <button data-go="home" class="active">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 11.5L12 5l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1z"/></svg>
+        Home
+      </button>
+      <button data-go="guide">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6l1.4 1.4M17 17l1.4 1.4M18.4 5.6L17 7M7 17l-1.4 1.4"/></svg>
+        Map
+      </button>
+      <button data-go="session">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        Session
+      </button>
+      <button data-go="howto">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 6h12M8 12h12M8 18h12M4 6h.01M4 12h.01M4 18h.01"/></svg>
+        How-to
+      </button>
+    </nav>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
